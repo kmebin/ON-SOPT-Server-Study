@@ -22,7 +22,7 @@ module.exports = async(req, res) => {
     const hashedPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
     const user = await userDB.create({ email, name, password: hashedPassword, salt });
 
-    res.status(sc.OK).send(success(sc.OK, rm.SIGN_UP_SUCCESS, { id: user.id, email, name }));
+    res.status(sc.CREATED).send(success(sc.CREATED, rm.SIGN_UP_SUCCESS, { id: user.id, email, name }));
   } catch (error) {
     console.error(error);
     res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.SIGN_UP_FAIL));
