@@ -20,6 +20,10 @@ module.exports = {
   NO_USER: '존재하지 않는 회원입니다.',
   MISS_MATCH_PW: '비밀번호가 맞지 않습니다.',
 
+  // 유저
+  READ_ALL_USERS_SUCCESS: '모든 회원 조회 성공',
+  READ_ALL_USERS_FAIL: '모든 회원 조회 실패',
+
   // 서버 에러
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
 };
