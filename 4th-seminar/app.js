@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -29,7 +28,11 @@ app.use('/', require('./routes'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  next(createError(404));
+  res.status(404).send({
+    status: 404,
+    success: false,
+    message: "잘못된 경로입니다.",
+  });
 });
 
 // error handler
