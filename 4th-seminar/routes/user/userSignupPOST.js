@@ -14,9 +14,9 @@ module.exports = async(req, res) => {
   if (!email || !name || !password ) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
 
   try {
-    const alreadyEmail = await userDB.findOne({ where: { email } });
+    const alreadyUser = await userDB.findOne({ where: { email } });
 
-    if (alreadyEmail) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.ALREADY_EMAIL));
+    if (alreadyUser) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.ALREADY_EMAIL));
 
     const salt = crypto.randomBytes(64).toString('base64');
     const hashedPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
