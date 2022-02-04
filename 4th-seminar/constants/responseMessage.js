@@ -25,6 +25,8 @@ module.exports = {
   READ_ALL_USERS_FAIL: '모든 유저 조회 실패',
   READ_USER_SUCCESS: '유저 조회 성공',
   READ_USER_FAIL: '유저 조회 실패',
+  UPDATE_USER_SUCCESS: '유저 수정 성공',
+  UPDATE_USER_FAIL: '유저 수정 실패',
 
   // 서버 에러
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
