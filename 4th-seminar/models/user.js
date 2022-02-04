@@ -19,6 +19,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     freezeTabName: true,
-    underscored: true,
   });
 };
