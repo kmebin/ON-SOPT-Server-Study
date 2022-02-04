@@ -4,8 +4,8 @@ const rm = require('../../constants/responseMessage');
 const { userDB } = require('../../models');
 
 /**
-* @route PUT /user
-* @desc 유저 정보 수정
+* @route PUT /user/:userId
+* @desc 유저 수정
 */
 module.exports = async (req, res) => {
   const { userId } = req.params;
