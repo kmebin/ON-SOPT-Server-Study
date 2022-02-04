@@ -27,6 +27,8 @@ module.exports = {
   READ_USER_FAIL: '유저 조회 실패',
   UPDATE_USER_SUCCESS: '유저 수정 성공',
   UPDATE_USER_FAIL: '유저 수정 실패',
+  DELETE_USER_SUCCESS: '유저 삭제 성공',
+  DELETE_USER_FAIL: '유저 삭제 실패',
 
   // 서버 에러
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
