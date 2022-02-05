@@ -30,12 +30,16 @@ module.exports = {
   DELETE_USER_SUCCESS: '유저 삭제 성공',
   DELETE_USER_FAIL: '유저 삭제 실패',
 
-  // 포스트
-  CREATE_POST_SUCCESS: '포스트 생성 성공',
-  CREATE_POST_FAIL: '포스트 생성 실패',
-  READ_ALL_POSTS_SUCCESS: '모든 포스트 조회 성공',
-  READ_ALL_POSTS_FAIL: '모든 포스트 조회 실패',
-  NO_POST: '존재하지 않는 포스트입니다.',
+  // 게시글
+  CREATE_POST_SUCCESS: '게시글 작성 성공',
+  CREATE_POST_FAIL: '게시글 작성 실패',
+  READ_ALL_POSTS_SUCCESS: '모든 게시글 조회 성공',
+  READ_ALL_POSTS_FAIL: '모든 게시글 조회 실패',
+  NO_POST: '존재하지 않는 게시글입니다.',
+
+  // 좋아요
+  ADD_LIKE: '좋아요 성공',
+  CANCEL_LIKE: '좋아요 취소 성공',
 
   // 서버 에러
   INTERNAL_SERVER_ERROR: '서버 내부 오류',

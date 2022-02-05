@@ -7,7 +7,7 @@ const { userDB, postDB } = require('../models');
 module.exports = {
   /**
   * @route POST /post
-  * @desc 포스트 작성
+  * @desc 게시글 작성
   */
   create: async (req, res) => {
     const { userId, title, content } = req.body;
@@ -29,7 +29,7 @@ module.exports = {
   },
   /**
   * @route GET /post
-  * @desc 모든 포스트 조회
+  * @desc 모든 게시글 조회
   */
   readAll: async (req, res) => {
     try {
