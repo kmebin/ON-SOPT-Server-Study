@@ -15,7 +15,7 @@ module.exports = {
     if (!userId || !postId) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
     
     try {
-      const like = await likeDB.create({ userId, postId });
+      await likeDB.create({ userId, postId });
       
       res.status(sc.OK).send(success(sc.OK, rm.CREATE_LIKE_SUCCESS));
     } catch (error) {
