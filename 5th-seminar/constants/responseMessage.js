@@ -38,8 +38,8 @@ module.exports = {
   NO_POST: '존재하지 않는 게시글입니다.',
 
   // 좋아요
-  ADD_LIKE: '좋아요 성공',
-  CANCEL_LIKE: '좋아요 취소 성공',
+  CREATE_LIKE_SUCCESS: '좋아요 성공',
+  CREATE_LIKE_FAIL: '좋아요 실패',
 
   // 서버 에러
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
