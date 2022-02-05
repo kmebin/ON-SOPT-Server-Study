@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const crypto = require('crypto');
 const { success, fail } = require('../lib/util');
 const sc = require('../constants/statusCode');
@@ -23,10 +24,10 @@ module.exports = {
       const hashedPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
       const user = await userDB.create({ email, name, password: hashedPassword, salt });
 
-      res.status(sc.CREATED).send(success(sc.CREATED, rm.SIGN_UP_SUCCESS, { id: user.id, email, name }));
+      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_USER_SUCCESS, _.pick(user, ['id', 'email', 'name'])));
     } catch (error) {
       console.error(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.SIGN_UP_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.CREATE_USER_FAIL));
     }
   },
   /**
@@ -48,7 +49,7 @@ module.exports = {
 
       if (inputPassword !== hashedPassword) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.MISS_MATCH_PW));
       
-      res.status(sc.OK).send(success(sc.OK, rm.SIGN_UP_SUCCESS, { id, email, name }));
+      res.status(sc.OK).send(success(sc.OK, rm.SIGN_UP_SUCCESS, _.pick(user, ['id', 'email', 'name'])));
     } catch (error) {
       console.log(error);
       res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.SIGN_UP_FAIL));
