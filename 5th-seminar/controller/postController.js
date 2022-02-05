@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { Op } = require('sequelize');
 const { success, fail } = require('../lib/util');
 const sc = require('../constants/statusCode');
 const rm = require('../constants/responseMessage');
@@ -34,23 +35,25 @@ module.exports = {
   readAll: async (req, res) => {
     try {
       const posts = await postDB.findAll({
-        attributes:['id', 'title', 'content', 'createdAt'],
+        attributes: ['id', 'title', 'content', 'createdAt'],
         include: [{ 
           model: userDB,
           attributes: ['name'],
+        }, {
+          model: userDB,
+          as: 'liker',
         }],
-        raw: true,
-        nest: true,
       });
 
       if (!posts) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_POST));
-
-      const data = posts.map(item => ({
-        id: item.id,
-        title: item.title,
-        content: item.content,
-        name: item.user.name,
-        createdAt: item.createdAt,
+      
+      const data = posts.map(o => ({
+        id: o.dataValues.id,
+        title: o.dataValues.title,
+        content: o.dataValues.content,
+        name: o.dataValues.user.name,
+        createdAt: o.dataValues.createdAt,
+        likeCount: o.dataValues.liker.length,
       }));
 
       res.status(sc.OK).send(success(sc.OK, rm.READ_ALL_POSTS_SUCCESS, data));
