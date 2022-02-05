@@ -10,8 +10,8 @@ module.exports = {
   DELETE_MEMBER_SUCCESS: '회원 삭제 성공',
 
   // 회원가입
-  SIGN_UP_SUCCESS: '회원 가입 성공',
-  SIGN_UP_FAIL: '회원 가입 실패',
+  CREATE_USER_SUCCESS: '회원 가입 성공',
+  CREATE_USER_FAIL: '회원 가입 실패',
   ALREADY_EMAIL: '이미 사용중인 이메일입니다.',
 
   // 로그인
@@ -29,6 +29,13 @@ module.exports = {
   UPDATE_USER_FAIL: '유저 수정 실패',
   DELETE_USER_SUCCESS: '유저 삭제 성공',
   DELETE_USER_FAIL: '유저 삭제 실패',
+
+  // 포스트
+  CREATE_POST_SUCCESS: '포스트 생성 성공',
+  CREATE_POST_FAIL: '포스트 생성 실패',
+  READ_ALL_POSTS_SUCCESS: '모든 포스트 조회 성공',
+  READ_ALL_POSTS_FAIL: '모든 포스트 조회 실패',
+  NO_POST: '존재하지 않는 포스트입니다.',
 
   // 서버 에러
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
