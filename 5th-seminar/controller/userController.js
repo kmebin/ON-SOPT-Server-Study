@@ -49,7 +49,7 @@ module.exports = {
 
       if (inputPassword !== hashedPassword) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.MISS_MATCH_PW));
       
-      res.status(sc.OK).send(success(sc.OK, rm.SIGN_UP_SUCCESS, _.pick(user, ['id', 'email', 'name'])));
+      res.status(sc.OK).send(success(sc.OK, rm.SIGN_UP_SUCCESS, { id, email, name }));
     } catch (error) {
       console.log(error);
       res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
