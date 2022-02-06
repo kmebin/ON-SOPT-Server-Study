@@ -26,7 +26,7 @@ module.exports = {
       res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_POST_SUCCESS, _.pick(post, ['id', 'title', 'content', 'imageUrl'])));
     } catch (error) {
       console.log(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.CREATE_POST_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
     }
   },
   /**
@@ -60,7 +60,7 @@ module.exports = {
       res.status(sc.OK).send(success(sc.OK, rm.READ_ALL_POSTS_SUCCESS, data));
     } catch (error) {
       console.log(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.READ_ALL_POSTS_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
     }
   }
 };

@@ -27,7 +27,7 @@ module.exports = {
       res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_USER_SUCCESS, _.pick(user, ['id', 'email', 'name'])));
     } catch (error) {
       console.error(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.CREATE_USER_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
     }
   },
   /**
@@ -52,7 +52,7 @@ module.exports = {
       res.status(sc.OK).send(success(sc.OK, rm.SIGN_UP_SUCCESS, _.pick(user, ['id', 'email', 'name'])));
     } catch (error) {
       console.log(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.SIGN_UP_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
     }
   },
   /**
@@ -68,7 +68,7 @@ module.exports = {
       res.status(sc.OK).send(success(sc.OK, rm.READ_ALL_USERS_SUCCESS, users));
     } catch (error) {
       console.log(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.READ_ALL_USERS_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
     }
   },
   /**
@@ -91,7 +91,7 @@ module.exports = {
       res.status(sc.OK).send(success(sc.OK, rm.READ_USER_SUCCESS, user));
     } catch (error) {
       console.log(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.READ_USER_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
     }
   },
   /**
@@ -114,7 +114,7 @@ module.exports = {
       res.status(sc.OK).send(success(sc.OK, rm.UPDATE_USER_SUCCESS));
     } catch (error) {
       console.log(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.UPDATE_USER_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
     }
   },
   /**
@@ -134,7 +134,7 @@ module.exports = {
       res.status(sc.OK).send(success(sc.OK, rm.DELETE_USER_SUCCESS));
     } catch (error) {
       console.log(error);
-      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.DELETE_USER_FAIL));
+      res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
     }
   },
 };
