@@ -11,6 +11,7 @@ const upload = multer({
     s3,
     bucket: 'sopt-27-server',
     acl: 'public-read',
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function(req, file, cb) {
       const extension = file.originalname.split('.').pop();
       const format = `${dayjs().format('YYYYMMDD_HHmmss_')}${Math.round(Math.random() * 1000000000000).toString()}`;
