@@ -31,6 +31,7 @@ module.exports = {
 
   // 좋아요
   CREATE_LIKE_SUCCESS: '좋아요 성공',
+  DELETE_LIKE_SUCCESS: '좋아요 취소 성공',
 
   // 서버 에러
   INTERNAL_SERVER_ERROR: '서버 내부 오류',

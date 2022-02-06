@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       }
     },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0,
+    },
   }, {
     freezeTableName: true,
   });
