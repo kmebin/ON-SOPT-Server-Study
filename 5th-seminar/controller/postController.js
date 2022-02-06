@@ -12,6 +12,7 @@ module.exports = {
   */
   create: async (req, res) => {
     const { userId, title, content } = req.body;
+    const imageUrl = req.file.location;
     
     if (!userId || !title || !content) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
     
@@ -20,9 +21,9 @@ module.exports = {
 
       if (!user) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_USER));
 
-      const post = await postDB.create({ userId, title, content });
+      const post = await postDB.create({ userId, title, content, imageUrl });
 
-      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_POST_SUCCESS, _.pick(post, ['id', 'title', 'content'])));
+      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_POST_SUCCESS, _.pick(post, ['id', 'title', 'content', 'imageUrl'])));
     } catch (error) {
       console.log(error);
       res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.CREATE_POST_FAIL));
