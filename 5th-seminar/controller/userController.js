@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const { success, fail } = require('../lib/util');
 const sc = require('../constants/statusCode');
 const rm = require('../constants/responseMessage');
-const { userDB } = require('../models');
+const { userDB, postDB } = require('../models');
 
 module.exports = {
   /**
@@ -73,7 +73,7 @@ module.exports = {
   },
   /**
   * @route GET /user/:userId
-  * @desc 유저 조회
+  * @desc 유저 정보 조회
   */
   read: async (req, res) => {
     const { userId } = req.params;
@@ -84,6 +84,10 @@ module.exports = {
       const user = await userDB.findOne({
         where: { id: userId },
         attributes: ['id', 'email', 'name'],
+        include: [{
+          model: postDB,
+          attributes: { exclude: ['userId', 'createdAt', 'updatedAt'] },
+        }]
       });
 
       if (!user) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_USER));
