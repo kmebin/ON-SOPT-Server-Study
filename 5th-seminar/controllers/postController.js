@@ -12,7 +12,7 @@ module.exports = {
   */
   create: async (req, res) => {
     const { userId, title, content } = req.body;
-    const imageUrl = req.file.location;
+    const isExistImage = req.file ? true : false;
     
     if (!userId || !title || !content) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
     
@@ -20,6 +20,10 @@ module.exports = {
       const user = await userDB.findOne({ where: { id: userId } });
 
       if (!user) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_USER));
+
+      let imageUrl;
+
+      if (isExistImage) imageUrl = req.file.location;
 
       const post = await postDB.create({ userId, title, content, imageUrl });
 
