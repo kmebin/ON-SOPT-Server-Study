@@ -109,7 +109,7 @@ module.exports = {
         where: { id: userId }
       });
       
-      if (!user) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_USER));
+      if (user[0] === 0) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_USER));
       
       res.status(sc.OK).send(success(sc.OK, rm.UPDATE_USER_SUCCESS));
     } catch (error) {
@@ -129,10 +129,8 @@ module.exports = {
     try {
       const user = await userDB.destroy({ where: { id: userId } });
 
-      console.log(user)
-      if (!user) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_USER));
+      if (user === 0) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_USER));
     
-      
       res.status(sc.OK).send(success(sc.OK, rm.DELETE_USER_SUCCESS));
     } catch (error) {
       console.log(error);
