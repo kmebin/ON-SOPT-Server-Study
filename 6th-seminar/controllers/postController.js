@@ -47,6 +47,7 @@ module.exports = {
         }, {
           model: userDB,
           as: 'liker',
+          through: { where: { isDeleted: false } },
         }],
       });
 
