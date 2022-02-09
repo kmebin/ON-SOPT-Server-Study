@@ -33,6 +33,12 @@ module.exports = {
   CREATE_LIKE_SUCCESS: '좋아요 성공',
   DELETE_LIKE_SUCCESS: '좋아요 취소 성공',
 
+  // 토큰
+  EXPIRED_TOKEN: '토큰이 만료되었습니다.',
+  EXPIRED_ALL_TOKEN: '모든 토큰이 만료되었습니다.',
+  INVALID_TOKEN: '유효하지 않은 토큰입니다.',
+  EMPTY_TOKEN: '토큰 값이 없습니다.',
+
   // 서버 에러
   INTERNAL_SERVER_ERROR: '서버 내부 오류',
 };
