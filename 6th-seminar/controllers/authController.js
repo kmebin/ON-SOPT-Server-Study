@@ -88,9 +88,9 @@ module.exports = {
           where: { refreshToken: refreshtoken },
           attributes: [ 'id', 'email', 'name' ],
         });
-        const { newAccessToken } = jwt.sign(user);
+        const { accessToken } = jwt.sign(user);
 
-        return res.status(sc.OK).send(success(sc.OK, rm.CREATE_TOKEN, { newAccessToken }));
+        return res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_TOKEN, { accessToken }));
       }
       res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.VALID_TOKEN));
     } catch (error) {
