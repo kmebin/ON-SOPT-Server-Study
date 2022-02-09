@@ -53,8 +53,13 @@ module.exports = {
       const inputPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
 
       if (inputPassword !== hashedPassword) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.MISS_MATCH_PW));
-      
-      res.status(sc.OK).send(success(sc.OK, rm.SIGN_UP_SUCCESS, { id, email, name }));
+
+      const { accessToken } = jwt.sign(user);
+      const { refreshToken } = jwt.createRefresh();
+
+      await userDB.update({ refreshToken }, { where: { id } })
+
+      res.status(sc.OK).send(success(sc.OK, rm.SIGN_UP_SUCCESS, { id, email, name, accessToken, refreshToken }));
     } catch (error) {
       console.log(error);
       res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
