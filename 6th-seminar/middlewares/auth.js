@@ -15,9 +15,12 @@ const auth = async (req, res, next) => {
 
     if (decoded === TOKEN_EXPIRED) return res.status(sc.UNAUTHORIZED).send(fail(sc.UNAUTHORIZED, rm.EXPIRED_TOKEN));
     if (decoded === TOKEN_INVALID) return res.status(sc.UNAUTHORIZED).send(fail(sc.UNAUTHORIZED, rm.INVALID_TOKEN));
-    if (!decoded.id) return res.status(sc.UNAUTHORIZED).send(fail(sc.UNAUTHORIZED, rm.INVALID_TOKEN));
 
-    const user = await userDB.findOne({ where: { email } });
+    const userId = decoded.id;
+
+    if (!userId) return res.status(sc.UNAUTHORIZED).send(fail(sc.UNAUTHORIZED, rm.INVALID_TOKEN));
+
+    const user = await userDB.findOne({ where: { id: userId } });
 
     if (!user) return res.status(sc.UNAUTHORIZED).send(fail(sc.UNAUTHORIZED, rm.NO_USER));
 
