@@ -24,9 +24,12 @@ module.exports = {
 
       const salt = crypto.randomBytes(64).toString('base64');
       const hashedPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
-      const user = await userDB.create({ email, name, password: hashedPassword, salt });
+      const { refreshToken } = jwt.createRefresh();
+      const user = await userDB.create({ email, name, password: hashedPassword, salt, refreshToken });
+      const { accessToken } = jwt.sign(user);
+      const data = { id: user.id, email, name, accessToken, refreshToken };
 
-      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_USER_SUCCESS, _.pick(user, ['id', 'email', 'name'])));
+      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_USER_SUCCESS, data));
     } catch (error) {
       console.error(error);
       res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
