@@ -5,7 +5,7 @@ const { userDB, postDB } = require('../models');
 
 module.exports = {
   /**
-  * @route GET /user
+  * @route GET /user/all
   * @desc 모든 유저 조회
   */
   readAll: async (req, res) => {
@@ -21,14 +21,12 @@ module.exports = {
     }
   },
   /**
-  * @route GET /user/:userId
+  * @route GET /user
   * @desc 유저 정보 조회
   */
   read: async (req, res) => {
-    const { userId } = req.params;
-    
-    if (!userId) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
-    
+    const userId = req.user.id;
+        
     try {
       const user = await userDB.findOne({
         where: { id: userId },
@@ -48,14 +46,14 @@ module.exports = {
     }
   },
   /**
-  * @route PUT /user/:userId
+  * @route PUT /user
   * @desc 유저 수정
   */
   update: async (req, res) => {
-    const { userId } = req.params;
     const { name } = req.body;
+    const userId = req.user.id;
     
-    if (!userId || !name) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+    if (!name) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
     
     try {
       const user = await userDB.update({ name }, {
@@ -71,14 +69,12 @@ module.exports = {
     }
   },
   /**
-  * @route DELETE /user/:userId
+  * @route DELETE /user
   * @desc 유저 삭제
   */
   delete: async (req, res) => {
-    const { userId } = req.params;
-  
-    if (!userId) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
-    
+    const userId = req.user.id;
+      
     try {
       const user = await userDB.destroy({ where: { id: userId } });
 

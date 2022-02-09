@@ -10,10 +10,10 @@ module.exports = {
   * @desc 게시글 좋아요 및 취소
   */
   create: async (req, res) => {
-    const { userId } = req.body;
     const { postId } = req.params;
+    const userId = req.user.id;
     
-    if (!userId || !postId) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+    if (!postId) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
     
     try {
       const user = await userDB.findOne({ where: { id: userId } });

@@ -11,10 +11,11 @@ module.exports = {
   * @desc 게시글 작성
   */
   create: async (req, res) => {
-    const { userId, title, content } = req.body;
+    const { title, content } = req.body;
+    const userId = req.user.id;
     const isExistImage = req.file ? true : false;
     
-    if (!userId || !title || !content) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+    if (!title || !content) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
     
     try {
       const user = await userDB.findOne({ where: { id: userId } });
