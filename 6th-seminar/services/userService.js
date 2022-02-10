@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const crypto = require('crypto');
 const { userDB } = require('../models');
 const { createToken } = require('./tokenService');
@@ -9,10 +10,8 @@ module.exports = {
       const salt = crypto.randomBytes(64).toString('base64');
       const hashedPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
       const user = await userDB.create({ email, name, password: hashedPassword, salt });
-      const { accessToken, refreshToken } = await createToken(user);
-      const data = { id: user.id, email, name, accessToken, refreshToken };
 
-      return data;
+      return _.pick(user, ['id', 'email', 'name']);
     } catch (error) {
       throw error;
     }

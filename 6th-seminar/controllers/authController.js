@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const { success, fail } = require('../lib/util');
 const sc = require('../constants/statusCode');
 const rm = require('../constants/responseMessage');
-const { userService } = require('../services');
+const { userService, tokenService } = require('../services');
 const jwt = require('../lib/jwt');
 const { TOKEN_EXPIRED, TOKEN_INVALID } = require('../constants/jwt');
 
@@ -23,8 +23,9 @@ module.exports = {
       if (alreadyUser) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.ALREADY_EMAIL));
 
       const user = await userService.createUser(email, name, password);
+      const token = await tokenService.createToken(user);
 
-      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_USER_SUCCESS, user));
+      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_USER_SUCCESS, _.merge(user, token)));
     } catch (error) {
       console.error(error);
       res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
