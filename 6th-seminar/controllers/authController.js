@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const { success, fail } = require('../lib/util');
 const sc = require('../constants/statusCode');
 const rm = require('../constants/responseMessage');
-const { userDB } = require('../models');
+const { userService } = require('../services');
 const jwt = require('../lib/jwt');
 const { TOKEN_EXPIRED, TOKEN_INVALID } = require('../constants/jwt');
 
@@ -18,18 +18,13 @@ module.exports = {
     if (!email || !name || !password ) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
 
     try {
-      const alreadyUser = await userDB.findOne({ where: { email } });
+      const alreadyUser = await userService.getUserByEmail(email);
 
       if (alreadyUser) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.ALREADY_EMAIL));
 
-      const salt = crypto.randomBytes(64).toString('base64');
-      const hashedPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
-      const { refreshToken } = jwt.createRefresh();
-      const user = await userDB.create({ email, name, password: hashedPassword, salt, refreshToken });
-      const { accessToken } = jwt.sign(user);
-      const data = { id: user.id, email, name, accessToken, refreshToken };
+      const user = await userService.createUser(email, name, password);
 
-      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_USER_SUCCESS, data));
+      res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_USER_SUCCESS, user));
     } catch (error) {
       console.error(error);
       res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
