@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const crypto = require('crypto');
 const { userDB } = require('../models');
-const { createToken } = require('./tokenService');
 
 module.exports = {
   // 유저 생성
@@ -25,5 +24,13 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+  // 비밀번호 일치 여부 체크
+  checkPassword: (user, password) => {
+    const { password: hashedPassword, salt } = user;
+    const inputPassword = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
+    const isMissmatch = inputPassword !== hashedPassword;
+
+    return isMissmatch;
   },
 };
